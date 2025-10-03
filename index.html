@@ -8,55 +8,96 @@
         body {
             font-family: Arial, sans-serif;
             max-width: 600px;
-            margin: 50px auto;
+            margin: 100px auto;
             padding: 20px;
             text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
         }
         .button {
-            background: #007cba;
-            color: white;
-            padding: 15px 30px;
+            background: #00d9ff;
+            color: #000;
+            padding: 15px 40px;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
-            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s;
         }
         .button:hover {
-            background: #005a87;
+            background: #00ffaa;
+            transform: scale(1.05);
+        }
+        .countdown {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .url {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
         }
     </style>
 </head>
 <body>
-    <h2>WWCAT Resource</h2>
-    <p>Ресурс доступен по HTTP протоколу. Для перехода нажмите кнопку:</p>
-    
-    <button class="button" onclick="redirectToResource()">
-        Перейти к ресурсу
-    </button>
-    
-    <p style="margin-top: 30px; font-size: 14px; color: #666;">
-        Или откройте ссылку вручную:<br>
-        <code>http://wwcat.duckdns.org:8099/</code>
-    </p>
+    <div class="container">
+        <h1>🔗 WWCAT Resource</h1>
+        <p>Ресурс доступен по HTTP протоколу</p>
+        
+        <div class="countdown" id="countdown">
+            Автоматический переход через: <span id="timer">5</span> сек
+        </div>
+        
+        <button class="button" onclick="redirectNow()">
+            ⚡ Перейти сейчас
+        </button>
+        
+        <div style="margin-top: 30px;">
+            <p>Или откройте ссылку вручную:</p>
+            <div class="url">http://wwcat.duckdns.org:8099/</div>
+        </div>
+    </div>
 
     <script>
-        function redirectToResource() {
-            // Пытаемся открыть в новом окне/вкладке
-            window.open('http://wwcat.duckdns.org:8099/', '_blank');
-            
-            // Альтернатива: редирект текущей страницы
-            // window.location.href = 'http://wwcat.duckdns.org:8099/';
+        let countdown = 5;
+        const timerElement = document.getElementById('timer');
+        let redirectTimeout;
+        
+        function redirectNow() {
+            clearTimeout(redirectTimeout);
+            performRedirect();
         }
         
-        // Автоматический редирект через 3 секунды
-        setTimeout(() => {
-            document.body.innerHTML += '<p>Автоматический переход через 3 секунды...</p>';
-        }, 1000);
+        function performRedirect() {
+            // Прямой редирект текущей страницы - это разрешено
+            window.location.href = 'http://wwcat.duckdns.org:8099/';
+        }
         
-        setTimeout(() => {
-            redirectToResource();
-        }, 4000);
+        function updateCountdown() {
+            countdown--;
+            timerElement.textContent = countdown;
+            
+            if (countdown > 0) {
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+        
+        // Запускаем обратный отсчет
+        setTimeout(updateCountdown, 1000);
+        
+        // Авто-редирект через 5 секунд
+        redirectTimeout = setTimeout(performRedirect, 5000);
     </script>
 </body>
 </html>

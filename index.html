@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta http-equiv="refresh" content="0; url=http://wwcat.duckdns.org:8099">
-    <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WWCAT Resource</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        #resourceFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="http://wwcat.duckdns.org:8099">http://wwcat.duckdns.org:8099</a></p>
+    <div class="header">
+        Просмотр ресурса: wwcat.duckdns.org:8099
+    </div>
+    <div class="container">
+        <iframe 
+            id="resourceFrame"
+            src="http://wwcat.duckdns.org:8099/"
+            title="WWCAT Resource"
+            allowfullscreen
+        ></iframe>
+    </div>
+    
+    <script>
+        // Обработка ошибок загрузки
+        document.getElementById('resourceFrame').onload = function() {
+            console.log('Resource loaded successfully');
+        };
+        
+        document.getElementById('resourceFrame').onerror = function() {
+            console.log('Error loading resource');
+        };
+    </script>
 </body>
 </html>

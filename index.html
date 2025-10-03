@@ -3,59 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WWCAT Resource</title>
+    <title>Redirect to WWCAT</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
             font-family: Arial, sans-serif;
-            background: #f0f0f0;
-        }
-        .container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-        #resourceFrame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: white;
-        }
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 10px;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
             text-align: center;
-            font-size: 14px;
+        }
+        .button {
+            background: #007cba;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .button:hover {
+            background: #005a87;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        Просмотр ресурса: wwcat.duckdns.org:8099
-    </div>
-    <div class="container">
-        <iframe 
-            id="resourceFrame"
-            src="http://wwcat.duckdns.org:8099/"
-            title="WWCAT Resource"
-            allowfullscreen
-        ></iframe>
-    </div>
+    <h2>WWCAT Resource</h2>
+    <p>Ресурс доступен по HTTP протоколу. Для перехода нажмите кнопку:</p>
     
+    <button class="button" onclick="redirectToResource()">
+        Перейти к ресурсу
+    </button>
+    
+    <p style="margin-top: 30px; font-size: 14px; color: #666;">
+        Или откройте ссылку вручную:<br>
+        <code>http://wwcat.duckdns.org:8099/</code>
+    </p>
+
     <script>
-        // Обработка ошибок загрузки
-        document.getElementById('resourceFrame').onload = function() {
-            console.log('Resource loaded successfully');
-        };
+        function redirectToResource() {
+            // Пытаемся открыть в новом окне/вкладке
+            window.open('http://wwcat.duckdns.org:8099/', '_blank');
+            
+            // Альтернатива: редирект текущей страницы
+            // window.location.href = 'http://wwcat.duckdns.org:8099/';
+        }
         
-        document.getElementById('resourceFrame').onerror = function() {
-            console.log('Error loading resource');
-        };
+        // Автоматический редирект через 3 секунды
+        setTimeout(() => {
+            document.body.innerHTML += '<p>Автоматический переход через 3 секунды...</p>';
+        }, 1000);
+        
+        setTimeout(() => {
+            redirectToResource();
+        }, 4000);
     </script>
 </body>
 </html>

@@ -1,103 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to WWCAT</title>
+    <title>WWCAT</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-        }
-        .container {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        .button {
-            background: #00d9ff;
-            color: #000;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 20px 0;
-            transition: all 0.3s;
-        }
-        .button:hover {
-            background: #00ffaa;
-            transform: scale(1.05);
-        }
-        .countdown {
-            font-size: 24px;
-            margin: 20px 0;
-        }
-        .url {
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            word-break: break-all;
-        }
+        body { margin: 0; overflow: hidden; }
+        iframe { width: 100vw; height: 100vh; border: none; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔗 WWCAT Resource</h1>
-        <p>Ресурс доступен по HTTP протоколу</p>
-        
-        <div class="countdown" id="countdown">
-            Автоматический переход через: <span id="timer">5</span> сек
-        </div>
-        
-        <button class="button" onclick="redirectNow()">
-            ⚡ Перейти сейчас
-        </button>
-        
-        <div style="margin-top: 30px;">
-            <p>Или откройте ссылку вручную:</p>
-            <div class="url">http://wwcat.duckdns.org:8099/</div>
-        </div>
-    </div>
-
-    <script>
-        let countdown = 5;
-        const timerElement = document.getElementById('timer');
-        let redirectTimeout;
-        
-        function redirectNow() {
-            clearTimeout(redirectTimeout);
-            performRedirect();
-        }
-        
-        function performRedirect() {
-            // Прямой редирект текущей страницы - это разрешено
-            window.location.href = 'http://wwcat.duckdns.org:8099/';
-        }
-        
-        function updateCountdown() {
-            countdown--;
-            timerElement.textContent = countdown;
-            
-            if (countdown > 0) {
-                setTimeout(updateCountdown, 1000);
-            }
-        }
-        
-        // Запускаем обратный отсчет
-        setTimeout(updateCountdown, 1000);
-        
-        // Авто-редирект через 5 секунд
-        redirectTimeout = setTimeout(performRedirect, 5000);
-    </script>
+    <iframe src="http://wwcat.duckdns.org:8099/"></iframe>
 </body>
 </html>
